@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nuestra Boda | 29 de Mayo de 2027</title>
+  
+  <!-- Tipografía elegante desde Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <style>
+    /* RESET & ESTILOS BASE */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background-color: #f7f9fc;
+      color: #1a2332;
+      line-height: 1.6;
+    }
+    h1, h2, h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 500;
+      letter-spacing: 1px;
+    }
+
+    /* MENÚ DE NAVEGACIÓN - AZUL MARINO */
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background-color: rgba(11, 27, 61, 0.95);
+      backdrop-filter: blur(5px);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+      z-index: 1000;
+      display: flex;
+      justify-content: center;
+      padding: 15px 0;
+    }
+    nav a {
+      margin: 0 20px;
+      text-decoration: none;
+      color: #e0e6ed;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      transition: color 0.3s;
+    }
+    nav a:hover {
+      color: #c5a059;
+    }
+
+    /* SECCIÓN HERO / FOTO PRINCIPAL */
+    .hero {
+      position: relative;
+      height: 90vh;
+      background: linear-gradient(rgba(11, 27, 61, 0.45), rgba(11, 27, 61, 0.45)), 
+                  url('foto.jpeg') center/cover no-repeat;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      color: #ffffff;
+      text-align: center;
+      padding: 0 20px;
+    }
+    .hero h1 {
+      font-size: 4rem;
+      margin-bottom: 10px;
+      color: #ffffff;
+    }
+    .hero p {
+      font-size: 1.3rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: #c5a059;
+    }
+
+    /* CONTENEDOR GENERAL */
+    .container {
+      max-width: 900px;
+      margin: 80px auto;
+      padding: 0 20px;
+      text-align: center;
+    }
+    .section-title {
+      font-size: 2.8rem;
+      color: #0b1b3d;
+      margin-bottom: 10px;
+    }
+    .divider {
+      width: 60px;
+      height: 2px;
+      background-color: #c5a059;
+      margin: 0 auto 30px auto;
+    }
+
+    /* SECCIÓN SAVE THE DATE Y BOTÓN */
+    .save-the-date-btn {
+      display: inline-block;
+      background-color: #0b1b3d;
+      color: #ffffff;
+      border: 1px solid #c5a059;
+      padding: 14px 32px;
+      border-radius: 30px;
+      font-size: 0.9rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(11, 27, 61, 0.2);
+      margin-top: 20px;
+    }
+    .save-the-date-btn:hover {
+      background-color: #c5a059;
+      color: #0b1b3d;
+      transform: translateY(-2px);
+    }
+
+    /* REPRODUCTOR DE VIDEO VERTICAL (TIKTOK / REELS 9:16) */
+    .video-wrapper {
+      display: none;
+      margin: 30px auto 0 auto;
+      max-width: 360px; /* Tamaño optimizado para videos verticales */
+      width: 100%;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(11, 27, 61, 0.25);
+      background-color: #000000;
+    }
+    .video-wrapper video {
+      width: 100%;
+      height: auto;
+      max-height: 80vh;
+      display: block;
+      border-radius: 16px;
+      object-fit: contain;
+    }
+
+    /* CRONÓMETRO DE CUENTA REGRESIVA (OCULTO INICIALMENTE) */
+    .countdown-section {
+      display: none;
+      animation: fadeIn 1s ease-in-out;
+    }
+    .countdown-container {
+      background-color: #0b1b3d;
+      color: #ffffff;
+      padding: 40px 20px;
+      border-radius: 12px;
+      margin-top: 40px;
+      box-shadow: 0 8px 25px rgba(11, 27, 61, 0.15);
+    }
+    .countdown-title {
+      font-size: 1.8rem;
+      color: #c5a059;
+      margin-bottom: 25px;
+    }
+    .timer {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+    .timer-box {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(197, 160, 89, 0.3);
+      padding: 15px;
+      border-radius: 8px;
+      min-width: 80px;
+    }
+    .timer-number {
+      font-size: 2.2rem;
+      font-weight: 600;
+      font-family: 'Cormorant Garamond', serif;
+      color: #ffffff;
+    }
+    .timer-label {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: #c5a059;
+      margin-top: 5px;
+    }
+
+    /* SECCIÓN PRÓXIMAMENTE */
+    .next-steps {
+      margin-top: 60px;
+      padding: 30px;
+      background-color: #ffffff;
+      border-radius: 12px;
+      border: 1px solid #e2e8f0;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+    }
+    .next-steps p {
+      color: #4a5568;
+      font-size: 0.95rem;
+    }
+
+    /* PIE DE PÁGINA */
+    footer {
+      text-align: center;
+      padding: 40px 20px;
+      font-size: 0.85rem;
+      color: #a0aec0;
+      background-color: #0b1b3d;
+      border-top: 1px solid rgba(197, 160, 89, 0.2);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- MENÚ DE NAVEGACIÓN -->
+  <nav>
+    <a href="#inicio">Inicio</a>
+    <a href="#save-the-date">Save The Date</a>
+    <a href="#proximamente">Próximamente</a>
+  </nav>
+
+  <!-- FOTO PRINCIPAL / HERO -->
+  <header id="inicio" class="hero">
+    <h1>Nuestra Boda</h1>
+    <p>29 de Mayo de 2027</p>
+  </header>
+
+  <!-- SECCIÓN SAVE THE DATE Y VIDEO -->
+  <section id="save-the-date" class="container">
+    <h2 class="section-title">Save The Date</h2>
+    <div class="divider"></div>
+    <p>Guarda la fecha para acompañarnos en el día más importante de nuestras vidas.</p>
+    
+    <button class="save-the-date-btn" onclick="revealContent()">¡Haz clic aquí para ver el Save The Date!</button>
+
+    <!-- REPRODUCTOR DE VIDEO LOCAL VERTICAL -->
+    <div id="videoContainer" class="video-wrapper">
+      <video id="weddingVideo" controls playsinline preload="metadata">
+        <!-- Reemplaza 'video.mp4' con el nombre EXACTO de tu archivo (ej. save-the-date.mp4) -->
+        <source src="save-the-date.mp4" type="video/mp4">
+        Tu navegador no soporta la reproducción de video.
+      </video>
+    </div>
+
+    <!-- CRONÓMETRO (Aparece junto con el video) -->
+    <div id="countdownSection" class="countdown-section">
+      <div class="countdown-container">
+        <h3 class="countdown-title">Tiempo para el Gran Día</h3>
+        <div class="timer">
+          <div class="timer-box">
+            <div id="days" class="timer-number">00</div>
+            <div class="timer-label">Días</div>
+          </div>
+          <div class="timer-box">
+            <div id="hours" class="timer-number">00</div>
+            <div class="timer-label">Horas</div>
+          </div>
+          <div class="timer-box">
+            <div id="minutes" class="timer-number">00</div>
+            <div class="timer-label">Minutos</div>
+          </div>
+          <div class="timer-box">
+            <div id="seconds" class="timer-number">00</div>
+            <div class="timer-label">Segundos</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECCIÓN PRÓXIMAMENTE -->
+  <section id="proximamente" class="container">
+    <div class="next-steps">
+      <h3 style="color: #0b1b3d; margin-bottom: 10px;">Más detalles muy pronto</h3>
+      <p>Estamos preparando cada detalle con mucho amor. Próximamente compartiremos aquí la mesa de regalos, ubicación del evento y la confirmación de asistencia.</p>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>Con cariño, los novios ❤️ | 2027</p>
+  </footer>
+
+  <!-- SCRIPT INTERACTIVO Y CRONÓMETRO -->
+  <script>
+    // DESPLEGAR VIDEO Y CRONÓMETRO
+    function revealContent() {
+      const videoWrapper = document.getElementById('videoContainer');
+      const countdownSection = document.getElementById('countdownSection');
+      const videoElement = document.getElementById('weddingVideo');
+      
+      if (videoWrapper.style.display === 'block') {
+        videoWrapper.style.display = 'none';
+        countdownSection.style.display = 'none';
+        videoElement.pause();
+      } else {
+        videoWrapper.style.display = 'block';
+        countdownSection.style.display = 'block';
+      }
+    }
+
+    // CRONÓMETRO CUENTA REGRESIVA
+    const weddingDate = new Date("May 29, 2027 18:00:00").getTime();
+
+    function updateCountdown() {
+      const now = new Date().getTime();
+      const distance = weddingDate - now;
+
+      if (distance < 0) {
+        document.getElementById("days").innerText = "00";
+        document.getElementById("hours").innerText = "00";
+        document.getElementById("minutes").innerText = "00";
+        document.getElementById("seconds").innerText = "00";
+        return;
+      }
+
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      document.getElementById("days").innerText = days < 10 ? "0" + days : days;
+      document.getElementById("hours").innerText = hours < 10 ? "0" + hours : hours;
+      document.getElementById("minutes").innerText = minutes < 10 ? "0" + minutes : minutes;
+      document.getElementById("seconds").innerText = seconds < 10 ? "0" + seconds : seconds;
+    }
+
+    setInterval(updateCountdown, 1000);
+    updateCountdown();
+  </script>
+</body>
+</html>
+```eof
+
